@@ -36,10 +36,8 @@ public class Hooks {
 
     @After(value = "not @no-quit", order = 900)
     public void after(Scenario scenario) {
-        if (!scenario.isFailed()) {
-            AbstractDriver.destroy();
-            log.info("Ending, good by");
-        } else log.info("Fail, not closing");
+        log.info("Closing driver after test");
+        AbstractDriver.destroy();
     }
 
     @After(value = "@no-quit", order = 900)
