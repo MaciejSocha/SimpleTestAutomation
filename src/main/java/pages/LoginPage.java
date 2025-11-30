@@ -10,6 +10,10 @@ public class LoginPage extends BasePage {
     private WebElement passwordField;
     @FindBy(id = "submit")
     private WebElement submitButton;
+    @FindBy(id = "login")
+    private WebElement loginModal;
+    @FindBy(id = "error")
+    private WebElement errorMessageText;
 
     public void setUsernameField(String username) {
         usernameField.sendKeys(username);
@@ -21,5 +25,16 @@ public class LoginPage extends BasePage {
 
     public void clickSubmitButton() {
         submitButton.click();
+    }
+
+    public boolean loginPageIsDisplayed() {
+        waitForPageLoaded();
+        return loginModal.isDisplayed() && usernameField.isDisplayed()
+                && passwordField.isDisplayed() && submitButton.isDisplayed();
+    }
+
+    public boolean verifyErrorMessage(String messageText) {
+        waitForElementIsDisplayed(errorMessageText);
+        return errorMessageText.getText().equals(messageText);
     }
 }

@@ -10,6 +10,8 @@ public class LoggedPage extends BasePage {
     private WebElement loggedInMessageText;
     @FindBy(xpath = "//p[@class='has-text-align-center']/strong")
     private WebElement welcomeText;
+    @FindBy(xpath = "//a[contains(@class, 'wp-block-button__link')]")
+    private WebElement logoutButton;
 
     public boolean isLoginSuccessfulMessageDisplayed() {
         waitForPageLoaded();
@@ -17,6 +19,11 @@ public class LoggedPage extends BasePage {
     }
 
     public boolean welcomeTextContainsProperUsername(String username) {
+        waitForPageLoaded();
         return welcomeText.getText().contains(username);
+    }
+
+    public void clickLogoutButton() {
+        logoutButton.click();
     }
 }

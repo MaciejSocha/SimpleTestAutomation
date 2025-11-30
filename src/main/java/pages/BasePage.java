@@ -1,7 +1,10 @@
 package pages;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AbstractDriver;
 
@@ -20,7 +23,7 @@ public class BasePage extends AbstractDriver {
         waitForPageLoaded();
     }
 
-    public void waitForPageLoaded() {
+    public void waitForPageLoaded() throws TimeoutException{
         new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT)).until(webDriver -> {
             JavascriptExecutor js = (JavascriptExecutor) webDriver;
 
@@ -37,5 +40,10 @@ public class BasePage extends AbstractDriver {
             Long xhr = (Long) js.executeScript("return window.activeRequests || 0");
             return xhr == 0;
         });
+    }
+
+    //potential StaleElementException
+    public void waitForElementIsDisplayed(WebElement element) throws TimeoutException {
+        new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT)).until(ExpectedConditions.visibilityOf(element));
     }
 }
