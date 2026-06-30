@@ -8,7 +8,7 @@ public class LoggedPage extends BasePage {
 
     @FindBy(xpath = "//h1[@class='post-title']")
     private WebElement loggedInMessageText;
-    @FindBy(xpath = "//p[@class='has-text-align-center']/strong")
+    @FindBy(xpath = "//p[@class='has-text-align-center wp-block-paragraph']/strong")
     private WebElement welcomeText;
     @FindBy(xpath = "//a[contains(@class, 'wp-block-button__link')]")
     private WebElement logoutButton;
